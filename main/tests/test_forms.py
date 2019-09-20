@@ -4,6 +4,7 @@ from main import forms
 
 
 class TestForm(TestCase):
+
     def test_valid_contact_us_form_sends_email(self):
         form = forms.ContactForm({
             'name': "Luke Skywalker",
