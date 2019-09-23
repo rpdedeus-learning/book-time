@@ -1,10 +1,11 @@
+import logging
+
 from django import forms
 from django.contrib.auth.forms import (
     UserCreationForm as DjangoUserCreationForm
 )
 from django.contrib.auth.forms import UsernameField
 from django.core.mail import send_mail
-import logging
 
 from . import models
 
@@ -29,7 +30,7 @@ class UserCreationForm(DjangoUserCreationForm):
             message,
             "site@booktime.domain",
             [self.cleaned_data["email"]],
-            fail_silently=True
+            fail_silently=True,
         )
 
 
