@@ -25,7 +25,7 @@ class SignupView(FormView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        form.save()
+        user = form.save()
 
         email = form.cleaned_data.get("email")
         raw_password = form.cleaned_data.get("password1")
@@ -33,7 +33,9 @@ class SignupView(FormView):
             "New signup for email=%s through signup view", email
         )
 
-        user = authenticate(email=email, raw_password=raw_password)
+        # user = authenticate(email=email, raw_password=raw_password)
+        logger.info("user is ", user)
+
         login(self.request, user)
 
         form.send_mail()

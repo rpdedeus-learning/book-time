@@ -39,8 +39,7 @@ class TestPage(TestCase):
         self.assertContains(response, "BookTime")
         self.assertIsInstance(response.context["form"], forms.UserCreationForm)
 
-    '''
-        def test_user_signup_page_submission_works(self):
+    def test_user_signup_page_submission_works(self):
         post_data = {
             "email": "user@domain.com",
             "password1": "abcabcabc",
@@ -53,7 +52,6 @@ class TestPage(TestCase):
         self.assertTrue(models.User.objects.filter(email="user@domain.com").exists())
         self.assertTrue(auth.get_user(self.client).is_authenticated)
         mock_send.assert_called_once()
-    '''
 
     def test_products_page_returns_active(self):
         models.Product.objects.create(
