@@ -20,12 +20,12 @@ class UserCreationForm(DjangoUserCreationForm):
 
     def send_mail(self):
         logger.info(
-            "Sending signup email for email=%",
+            "Sending signup email for email=%s",
             self.cleaned_data["email"],
         )
         message = "Welcome {}".format(self.cleaned_data["email"])
         send_mail(
-            "Welcome to BooTime",
+            "Welcome to BookTime",
             message,
             "site@booktime.domain",
             [self.cleaned_data["email"]],
