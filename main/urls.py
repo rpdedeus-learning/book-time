@@ -23,5 +23,6 @@ urlpatterns = [
     path('address/<int:pk>/delete', views.AddressDeleteView.as_view(), name='address_delete'),
     path('product/<slug:slug>/', DetailView.as_view(model=models.Product), name='product'),
     path('products/<slug:tag>/', views.ProductListView.as_view(), name="products"),
-    path('add_to_basket/', views.add_to_basket, name='add_to_basket')
+    path('add_to_basket/', views.add_to_basket, name='add_to_basket'),
+    path('basket/', views.manage_basket, name="basket")
 ]

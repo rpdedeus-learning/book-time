@@ -4,7 +4,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse, reverse_lazy
 from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
 from django.views.generic.list import ListView
@@ -151,3 +151,22 @@ def add_to_basket(request):
     return HttpResponseRedirect(
         reverse("product", args=(product.slug,))
     )
+
+
+def manage_basket(request):
+    if not request.basket:
+        return render(request, "basket.html", {"formset": None})
+
+    if request.method == "POST":
+        formset = forms.BasketLineFormSet(
+            request.POST, instance=request.basket
+        )
+        if formset.is_valid():
+            formset.save()
+    else:
+        formset = forms.BasketLineFormSet(instance=request.basket)
+
+    if request.basket.is_empty():
+        return render(request, "basket.html", {"formset": None})
+
+    return render(request, "basket.html", {"formset": formset})

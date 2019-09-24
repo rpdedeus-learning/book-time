@@ -7,6 +7,7 @@ from django.contrib.auth.forms import (
 )
 from django.contrib.auth.forms import UsernameField
 from django.core.mail import send_mail
+from django.forms import inlineformset_factory
 
 from . import models
 
@@ -78,3 +79,11 @@ class ContactForm(forms.Form):
             ["customerservice@booktime.domain"],
             fail_silently=False,
         )
+
+
+BasketLineFormSet = inlineformset_factory(
+    models.Basket,
+    models.BasketLine,
+    fields=("quantity",),
+    extra=0,
+)
