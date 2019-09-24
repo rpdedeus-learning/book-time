@@ -53,6 +53,9 @@ class UserAdmin(DjangoUserAdmin):
     ordering = ("email",)
 
 
+admin.site.register(models.Address)
+
+
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug', 'in_stock', 'price')
     list_filter = ('active', 'in_stock', 'date_updated')
